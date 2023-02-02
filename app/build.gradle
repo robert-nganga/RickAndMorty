@@ -6,6 +6,10 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdk 33
 
@@ -47,6 +51,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // Add the annotation processor if you are using Epoxy's annotations (recommended)
+    implementation "com.airbnb.android:epoxy:5.1.1"
+    kapt "com.airbnb.android:epoxy-processor:5.1.1"
 
     //Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.38.1'
