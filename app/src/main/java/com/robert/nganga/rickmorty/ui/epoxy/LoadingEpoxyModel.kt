@@ -1,6 +1,5 @@
-package com.robert.nganga.rickmorty.epoxy
+package com.robert.nganga.rickmorty.ui.epoxy
 
-import android.view.View
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.databinding.ModelLoadingBinding
 

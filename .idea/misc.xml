@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/rober/Documents/kotlin/RickMorty/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/rober/Documents/kotlin/RickMorty/app/src/main/res/layout/character_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rober/Documents/kotlin/RickMorty/app/src/main/res/layout/fragment_character_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rober/Documents/kotlin/RickMorty/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rober/Documents/kotlin/RickMorty/app/src/main/res/layout/model_character_data_point.xml" value="0.25" />

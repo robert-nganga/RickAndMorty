@@ -6,8 +6,8 @@ import com.bumptech.glide.Glide
 import com.robert.nganga.rickmorty.databinding.ModelCharacterDataPointBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterImageBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterNameBinding
-import com.robert.nganga.rickmorty.epoxy.LoadingEpoxyModel
-import com.robert.nganga.rickmorty.epoxy.ViewBindingKotlinModel
+import com.robert.nganga.rickmorty.ui.epoxy.LoadingEpoxyModel
+import com.robert.nganga.rickmorty.ui.epoxy.ViewBindingKotlinModel
 import com.robert.nganga.rickmorty.model.CharacterResponse
 
 

@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.robert.nganga.rickmorty.ui.fragments.CharacterDetailsFragment"
-        android:label="CharacterDetailsFragment" />
+        android:label="CharacterDetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

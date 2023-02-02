@@ -1,5 +1,6 @@
 package com.robert.nganga.rickmorty.repository
 
+import com.robert.nganga.rickmorty.data.CharacterPagingSource
 import com.robert.nganga.rickmorty.data.remote.RickMortyAPI
 import com.robert.nganga.rickmorty.model.CharacterResponse
 import com.robert.nganga.rickmorty.utils.Resource
@@ -10,6 +11,8 @@ import javax.inject.Inject
 
 class RickMortyRepositoryImpl@Inject constructor(
         private val api: RickMortyAPI): RickMortyRepository {
+
+    fun charactersPagingSource() = CharacterPagingSource(api)
 
     override suspend fun getCharacterById(characterId: Int): Resource<CharacterResponse> {
         return safeApiCall { api.getCharacter(characterId = characterId) }

@@ -51,6 +51,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // Paging
+    implementation "androidx.paging:paging-runtime:3.1.1"
+
     // Add the annotation processor if you are using Epoxy's annotations (recommended)
     implementation "com.airbnb.android:epoxy:5.1.1"
     kapt "com.airbnb.android:epoxy-processor:5.1.1"

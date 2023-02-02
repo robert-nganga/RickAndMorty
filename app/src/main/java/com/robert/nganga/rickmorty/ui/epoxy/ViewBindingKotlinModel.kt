@@ -1,4 +1,4 @@
-package com.robert.nganga.rickmorty.epoxy
+package com.robert.nganga.rickmorty.ui.epoxy
 
 import android.view.View
 import androidx.annotation.LayoutRes

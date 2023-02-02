@@ -2,22 +2,13 @@ package com.robert.nganga.rickmorty.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
-import com.robert.nganga.rickmorty.CharacterDetailsEpoxy
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.databinding.ActivityMainBinding
-import com.robert.nganga.rickmorty.model.CharacterResponse
-import com.robert.nganga.rickmorty.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
