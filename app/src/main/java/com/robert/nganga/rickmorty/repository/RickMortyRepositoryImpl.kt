@@ -15,7 +15,7 @@ class RickMortyRepositoryImpl@Inject constructor(
     fun charactersPagingSource() = CharacterPagingSource(api)
 
     override suspend fun getCharacterById(characterId: Int): Resource<CharacterResponse> {
-        return safeApiCall { api.getCharacter(characterId = characterId) }
+        return safeApiCall { api.getCharacter(characterId) }
     }
 
     private inline fun <T> safeApiCall(apiCall: () -> Response<T>): Resource<T>{

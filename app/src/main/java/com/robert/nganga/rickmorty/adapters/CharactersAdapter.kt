@@ -33,7 +33,7 @@ class CharactersAdapter(private val deviceWidth: Int) :
         fun setData(character: CharacterResponse?) {
             if (character != null) {
                 val layoutParams = binding.imgCharacter.layoutParams
-                layoutParams.width = deviceWidth/2
+                layoutParams.width = deviceWidth / 2
                 binding.imgCharacter.layoutParams = layoutParams
                 Glide.with(binding.root).load(character.image).into(binding.imgCharacter)
             }
