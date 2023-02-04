@@ -12,6 +12,6 @@ interface CharacterRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllRemoteKeys(remoteKeys: List<CharacterRemoteKey>)
 
-    @Query("DELETE * FROM character_remote_keys_table")
+    @Query("DELETE FROM character_remote_keys_table")
     suspend fun deleteAllRemoteKeys()
 }

@@ -50,10 +50,12 @@ class CharacterDetailsEpoxy: EpoxyController() {
             imageUrl = characterResponse!!.image
         ).id("image").addTo(this)
 
-        DataPointEpoxy(
-            title = "Origin",
-            description = characterResponse!!.origin.name
-        ).id("origin").addTo(this)
+        characterResponse!!.origin?.let {
+            DataPointEpoxy(
+                title = "Origin",
+                description = it.name
+            ).id("origin").addTo(this)
+        }
 
         DataPointEpoxy(
             title = "Species",

@@ -26,11 +26,13 @@ class RickMortyViewModel@Inject constructor(
     private var _character : MutableLiveData<Resource<CharacterResponse>> = MutableLiveData()
     val character: LiveData<Resource<CharacterResponse>> get() = _character
 
-    val characters: Flow<PagingData<CharacterResponse>> = Pager(
-        config = PagingConfig(Constants.ITEMS_PER_PAGE, enablePlaceholders = false),
-        pagingSourceFactory = {repository.charactersPagingSource()}
-    ).flow
-     .cachedIn(viewModelScope)
+//    val characters: Flow<PagingData<CharacterResponse>> = Pager(
+//        config = PagingConfig(Constants.ITEMS_PER_PAGE, enablePlaceholders = false),
+//        pagingSourceFactory = {repository.charactersPagingSource()}
+//    ).flow
+//     .cachedIn(viewModelScope)
+
+    val characters: Flow<PagingData<CharacterResponse>> = repository.getAllCharacters()
 
 
     fun getCharacterById(id: Int) = viewModelScope.launch {

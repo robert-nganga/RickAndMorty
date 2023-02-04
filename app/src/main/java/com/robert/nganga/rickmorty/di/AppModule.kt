@@ -51,7 +51,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRickMortyRepository(api: RickMortyAPI): RickMortyRepository{
-        return RickMortyRepositoryImpl(api)
+    fun provideRickMortyRepository(
+        database:CharacterDatabase,
+        api: RickMortyAPI): RickMortyRepository{
+        return RickMortyRepositoryImpl(database, api)
     }
 }
