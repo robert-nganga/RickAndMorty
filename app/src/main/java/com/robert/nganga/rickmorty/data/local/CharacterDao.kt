@@ -12,7 +12,7 @@ import com.robert.nganga.rickmorty.model.CharacterResponse
 interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(repos: List<CharacterResponse>)
+    suspend fun insertAll(characters: List<CharacterResponse>)
 
     @Query("SELECT * FROM characters")
     fun reposByName(): PagingSource<Int, CharacterResponse>
