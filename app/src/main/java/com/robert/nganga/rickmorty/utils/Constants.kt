@@ -5,4 +5,5 @@ object Constants {
     const val ITEMS_PER_PAGE = 20
     const val STARTING_PAGE_INDEX = 1
     const val CHARACTER_DB = "character_db"
+    const val CHARACTER_REMOTE_KEYS_TABLE =  "character_remote_keys_table"
 }
