@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.robert.nganga.rickmorty.CharacterDetailsEpoxy
+import com.robert.nganga.rickmorty.ui.epoxy.CharacterDetailsEpoxy
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.databinding.FragmentCharacterDetailsBinding
 import com.robert.nganga.rickmorty.ui.MainActivity
@@ -48,6 +49,7 @@ class CharacterDetailsFragment: Fragment(R.layout.fragment_character_details) {
                 }
                 Resource.Status.ERROR -> {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+                    findNavController().navigateUp()
                 }
                 Resource.Status.LOADING -> {epoxyController.isLoading = true}
             }

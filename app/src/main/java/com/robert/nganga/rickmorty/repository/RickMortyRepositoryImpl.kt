@@ -4,6 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.robert.nganga.rickmorty.data.cache.CharacterCache
 import com.robert.nganga.rickmorty.data.paging.CharacterRemoteMediator
 import com.robert.nganga.rickmorty.data.local.CharacterDatabase
 import com.robert.nganga.rickmorty.data.mappers.CharacterMapper
@@ -14,6 +15,8 @@ import com.robert.nganga.rickmorty.model.Episode
 import com.robert.nganga.rickmorty.utils.Constants
 import com.robert.nganga.rickmorty.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import okio.IOException
 import retrofit2.HttpException
 import retrofit2.Response
@@ -22,6 +25,9 @@ import javax.inject.Inject
 class RickMortyRepositoryImpl@Inject constructor(
         private val database: CharacterDatabase,
         private val api: RickMortyAPI): RickMortyRepository {
+
+    // Mutex to make writes to cached values thread-safe.
+    private val characterMutex = Mutex()
 
 //    fun charactersPagingSource() = CharacterPagingSource(api)
 
@@ -36,13 +42,22 @@ class RickMortyRepositoryImpl@Inject constructor(
     }
 
     override suspend fun getCharacterById(characterId: Int): Resource<Character> {
-        val response = safeApiCall { api.getCharacter(characterId) }
+        val characterCache = characterMutex.withLock { CharacterCache.characterMap[characterId] }
 
-        return if (response.status ==  Resource.Status.SUCCESS) {
-            val episodeList = response.data?.let { getEpisodesFromCharacterResponse(it) }
-            val character = CharacterMapper.buildFrom(response.data!!, episodeList)
-            Resource.success(character)
-        }else{ Resource.error(response.message!!) }
+        // Check if the cache is empty and return it if its not
+        if (characterCache != null){
+            return Resource.success(characterCache)
+        }else{
+            val response = safeApiCall { api.getCharacter(characterId) }
+
+            return if (response.status ==  Resource.Status.SUCCESS) {
+                val episodeList = response.data?.let { getEpisodesFromCharacterResponse(it) }
+                val character = CharacterMapper.buildFrom(response.data!!, episodeList)
+                CharacterCache.characterMap[characterId] = character
+                Resource.success(character)
+            }else{ Resource.error(response.message!!) }
+        }
+
 
     }
 

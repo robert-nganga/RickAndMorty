@@ -1,14 +1,13 @@
-package com.robert.nganga.rickmorty
+package com.robert.nganga.rickmorty.ui.epoxy
 
 import android.util.Log
 import com.airbnb.epoxy.EpoxyController
 import com.bumptech.glide.Glide
+import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.databinding.ModelCharacterDataPointBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterImageBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterNameBinding
 import com.robert.nganga.rickmorty.model.Character
-import com.robert.nganga.rickmorty.ui.epoxy.LoadingEpoxyModel
-import com.robert.nganga.rickmorty.ui.epoxy.ViewBindingKotlinModel
 
 
 class CharacterDetailsEpoxy: EpoxyController() {
