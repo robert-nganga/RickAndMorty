@@ -1,9 +1,9 @@
-package com.robert.nganga.rickmorty.data
+package com.robert.nganga.rickmorty.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.robert.nganga.rickmorty.data.remote.RickMortyAPI
-import com.robert.nganga.rickmorty.model.CharacterResponse
+import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 import com.robert.nganga.rickmorty.utils.Constants.ITEMS_PER_PAGE
 import com.robert.nganga.rickmorty.utils.Constants.STARTING_PAGE_INDEX
 import okio.IOException

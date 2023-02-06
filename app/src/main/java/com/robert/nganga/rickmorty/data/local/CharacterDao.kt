@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.robert.nganga.rickmorty.model.CharacterResponse
+import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 
 
 @Dao

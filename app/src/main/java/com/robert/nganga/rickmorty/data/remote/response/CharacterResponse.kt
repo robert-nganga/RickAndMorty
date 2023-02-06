@@ -1,8 +1,10 @@
-package com.robert.nganga.rickmorty.model
+package com.robert.nganga.rickmorty.data.remote.response
 
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.robert.nganga.rickmorty.model.Location
+import com.robert.nganga.rickmorty.model.Origin
 
 
 @Entity(tableName = "characters")

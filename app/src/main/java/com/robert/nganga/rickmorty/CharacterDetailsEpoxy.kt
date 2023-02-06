@@ -6,9 +6,9 @@ import com.bumptech.glide.Glide
 import com.robert.nganga.rickmorty.databinding.ModelCharacterDataPointBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterImageBinding
 import com.robert.nganga.rickmorty.databinding.ModelCharacterNameBinding
+import com.robert.nganga.rickmorty.model.Character
 import com.robert.nganga.rickmorty.ui.epoxy.LoadingEpoxyModel
 import com.robert.nganga.rickmorty.ui.epoxy.ViewBindingKotlinModel
-import com.robert.nganga.rickmorty.model.CharacterResponse
 
 
 class CharacterDetailsEpoxy: EpoxyController() {
@@ -21,7 +21,7 @@ class CharacterDetailsEpoxy: EpoxyController() {
             }
         }
     
-    var characterResponse: CharacterResponse? = null
+    var character: Character? = null
         set(value) {
             field = value
             if (field != null){
@@ -36,21 +36,21 @@ class CharacterDetailsEpoxy: EpoxyController() {
             return
         }
 
-        if(characterResponse == null){
+        if(character == null){
             return
         }
 
         HeaderEpoxyModel(
-            name = characterResponse!!.name,
-            gender = characterResponse!!.gender,
-            status = characterResponse!!.status
+            name = character!!.name,
+            gender = character!!.gender,
+            status = character!!.status
         ).id("header").addTo(this)
 
         ImageEpoxyModel(
-            imageUrl = characterResponse!!.image
+            imageUrl = character!!.image
         ).id("image").addTo(this)
 
-        characterResponse!!.origin?.let {
+        character!!.origin?.let {
             DataPointEpoxy(
                 title = "Origin",
                 description = it.name
@@ -59,7 +59,7 @@ class CharacterDetailsEpoxy: EpoxyController() {
 
         DataPointEpoxy(
             title = "Species",
-            description = characterResponse!!.species
+            description = character!!.species
         ).id("species").addTo(this)
         
     }

@@ -1,11 +1,9 @@
 package com.robert.nganga.rickmorty.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.robert.nganga.rickmorty.model.CharacterRemoteKey
-import com.robert.nganga.rickmorty.model.CharacterResponse
+import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 
 
 @Database(

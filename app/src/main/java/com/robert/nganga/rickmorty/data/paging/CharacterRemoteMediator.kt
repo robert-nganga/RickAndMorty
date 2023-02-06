@@ -1,5 +1,6 @@
-package com.robert.nganga.rickmorty.data
+package com.robert.nganga.rickmorty.data.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -8,8 +9,7 @@ import androidx.room.withTransaction
 import com.robert.nganga.rickmorty.data.local.CharacterDatabase
 import com.robert.nganga.rickmorty.data.remote.RickMortyAPI
 import com.robert.nganga.rickmorty.model.CharacterRemoteKey
-import com.robert.nganga.rickmorty.model.CharacterResponse
-import com.robert.nganga.rickmorty.utils.Constants.ITEMS_PER_PAGE
+import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -48,7 +48,8 @@ class CharacterRemoteMediator@Inject constructor(
             }
 
             val response = api.getAllCharacter(page = currentPage).body()?.results!!
-            val endOfPaginationReached = response.isEmpty() || response.size < ITEMS_PER_PAGE
+            val endOfPaginationReached = response.isEmpty()
+            Log.i("CharacterRemoteMediator", "Requested data of size ${response.size} and page $currentPage")
 
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
