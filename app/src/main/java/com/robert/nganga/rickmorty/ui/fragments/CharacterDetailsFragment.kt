@@ -59,13 +59,4 @@ class CharacterDetailsFragment: Fragment(R.layout.fragment_character_details) {
         viewModel.getCharacterById(args.id)
     }
 
-    private fun getDeviceWidth(): Int {
-        val displayMetrics = resources.displayMetrics
-        val paddingWidthInDp = 26 // width in dp
-        val paddingWidthInPx = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            paddingWidthInDp.toFloat(), resources.displayMetrics).toInt()
-        Log.i("CharacterDetailsFragment", displayMetrics.widthPixels.toString())
-        return displayMetrics.widthPixels - paddingWidthInPx
-    }
 }

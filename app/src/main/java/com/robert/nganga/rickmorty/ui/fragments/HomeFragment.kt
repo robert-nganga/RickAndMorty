@@ -6,14 +6,18 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.adapters.CharactersAdapter
+import com.robert.nganga.rickmorty.adapters.CharactersLoadStateAdapter
 import com.robert.nganga.rickmorty.databinding.FragmentHomeBinding
 import com.robert.nganga.rickmorty.ui.MainActivity
 import com.robert.nganga.rickmorty.ui.RickMortyViewModel
@@ -48,6 +52,34 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_characterDetailsFragment, bundle)
         }
 
+//        binding.retryButton.setOnClickListener { repoAdapter.retry() }
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collect { loadState ->
+                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                // show empty list
+                binding.emptyList.isVisible = isListEmpty
+                // Only show the list if refresh succeeds.
+                //binding.rvCharacters.isVisible = !isListEmpty
+                // Show loading spinner during initial load or refresh.
+                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Show the retry state if initial load or refresh fails.
+                //retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                errorState?.let {
+                    Toast.makeText(
+                        requireContext(),
+                        "\uD83D\uDE28 Wooops ${it.error}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.characters.collect{
@@ -59,7 +91,11 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.bindAdapter(charactersAdapter: CharactersAdapter){
-        rvCharacters.adapter = charactersAdapter
+        adapter = CharactersAdapter(getDeviceWidth())
+        rvCharacters.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
+            header = CharactersLoadStateAdapter{ charactersAdapter.retry() },
+            footer = CharactersLoadStateAdapter{ charactersAdapter.retry() }
+        )
         rvCharacters.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
     }
 
