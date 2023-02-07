@@ -29,6 +29,10 @@ class CharactersAdapter(private val deviceWidth: Int) :
         return CharactersViewHolder(binding)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position == itemCount) SHOW_ITEM else LOADING_ITEM
+    }
+
     inner class CharactersViewHolder(private val binding: CharacterListItemBinding): RecyclerView.ViewHolder(binding.root){
         fun setData(character: CharacterResponse?) {
             if (character != null) {
@@ -49,5 +53,8 @@ class CharactersAdapter(private val deviceWidth: Int) :
             override fun areContentsTheSame(oldItem: CharacterResponse, newItem: CharacterResponse): Boolean =
                 oldItem == newItem
         }
+
+        private const val SHOW_ITEM = 0
+        const val LOADING_ITEM = 1
     }
 }

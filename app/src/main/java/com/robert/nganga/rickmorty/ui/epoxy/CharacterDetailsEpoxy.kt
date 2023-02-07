@@ -4,9 +4,7 @@ import android.util.Log
 import com.airbnb.epoxy.EpoxyController
 import com.bumptech.glide.Glide
 import com.robert.nganga.rickmorty.R
-import com.robert.nganga.rickmorty.databinding.ModelCharacterDataPointBinding
-import com.robert.nganga.rickmorty.databinding.ModelCharacterImageBinding
-import com.robert.nganga.rickmorty.databinding.ModelCharacterNameBinding
+import com.robert.nganga.rickmorty.databinding.*
 import com.robert.nganga.rickmorty.model.Character
 
 
@@ -41,56 +39,56 @@ class CharacterDetailsEpoxy: EpoxyController() {
 
         HeaderEpoxyModel(
             name = character!!.name,
-            gender = character!!.gender,
+            image = character!!.image,
             status = character!!.status
         ).id("header").addTo(this)
 
-        ImageEpoxyModel(
-            imageUrl = character!!.image
-        ).id("image").addTo(this)
+        PropertiesEpoxyModel(
+            gender = character!!.gender,
+            species = character!!.species,
+            status = character!!.status
+        ).id("properties").addTo(this)
 
-        character!!.origin?.let {
-            DataPointEpoxy(
-                title = "Origin",
-                description = it.name
-            ).id("origin").addTo(this)
-        }
-
-        DataPointEpoxy(
-            title = "Species",
-            description = character!!.species
-        ).id("species").addTo(this)
+        WhereAboutsEpoxy(
+            location = character!!.location!!.name,
+            origin = character!!.origin!!.name
+        )
         
     }
     
     data class HeaderEpoxyModel(
         val name: String,
-        val gender: String,
+        val image: String,
         val status: String
-    ): ViewBindingKotlinModel<ModelCharacterNameBinding>(R.layout.model_character_name){
-        override fun ModelCharacterNameBinding.bind() {
-            tvName.text = name
-            tvStatus.text = status
-            tvGender.text = gender
+    ): ViewBindingKotlinModel<EpoxyCharacterHeaderModelBinding>(R.layout.epoxy_character_header_model){
+        override fun EpoxyCharacterHeaderModelBinding.bind() {
+            tvCharacterName.text = name
+            tvCharacterStatus.text = status
+            Glide.with(root).load(image).into(imgCharacterImage)
+
         }
     }
 
-    data class ImageEpoxyModel(
-        val imageUrl: String
-    ): ViewBindingKotlinModel<ModelCharacterImageBinding>(R.layout.model_character_image){
-        override fun ModelCharacterImageBinding.bind() {
-            Glide.with(root).load(imageUrl).into(imgCharacter)
+    data class PropertiesEpoxyModel(
+        val gender: String,
+        val species: String,
+        val status: String
+    ): ViewBindingKotlinModel<EpoxyCharacterPropertiesModelBinding>(R.layout.epoxy_character_properties_model){
+        override fun EpoxyCharacterPropertiesModelBinding.bind() {
+            tvCharacterGender.text = gender
+            tvCharacterSpecies.text = species
+            tvCharacterStatus.text = status
         }
     }
 
-    data class DataPointEpoxy(
-        val title: String,
-        val description: String
-    ): ViewBindingKotlinModel<ModelCharacterDataPointBinding>(R.layout.model_character_data_point){
-        override fun ModelCharacterDataPointBinding.bind() {
-            tvTitle.text = title
-            Log.i("CharacterDetailsEpoxy", "Title text set with:: $title")
-            tvDescription.text = description
+    data class WhereAboutsEpoxy(
+        val location: String,
+        val origin: String
+    ): ViewBindingKotlinModel<EpoxyCharacterWhereAboutsModelBinding>(R.layout.epoxy_character_where_abouts_model){
+        override fun EpoxyCharacterWhereAboutsModelBinding.bind() {
+            tvCharacterOrigin.text = origin
+            tvCharacterLocation.text = location
+            Log.i("CharacterDetailsEpoxy", "Origin text set with:: $origin")
         }
 
     }

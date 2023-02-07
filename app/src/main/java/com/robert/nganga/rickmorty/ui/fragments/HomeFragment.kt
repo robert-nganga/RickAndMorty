@@ -14,9 +14,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.LoadStateAdapter
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.adapters.CharactersAdapter
+import com.robert.nganga.rickmorty.adapters.CharactersAdapter.Companion.LOADING_ITEM
 import com.robert.nganga.rickmorty.adapters.CharactersLoadStateAdapter
 import com.robert.nganga.rickmorty.databinding.FragmentHomeBinding
 import com.robert.nganga.rickmorty.ui.MainActivity
@@ -52,16 +55,16 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_characterDetailsFragment, bundle)
         }
 
-//        binding.retryButton.setOnClickListener { repoAdapter.retry() }
+        //binding.retryButton.setOnClickListener { adapter.retry() }
         lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
-                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                val isListEmpty = loadState.refresh is LoadState.Error && adapter.itemCount == 0
                 // show empty list
                 binding.emptyList.isVisible = isListEmpty
                 // Only show the list if refresh succeeds.
-                //binding.rvCharacters.isVisible = !isListEmpty
+                binding.rvCharacters.isVisible = !isListEmpty
                 // Show loading spinner during initial load or refresh.
-                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
                 //retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
@@ -91,12 +94,18 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.bindAdapter(charactersAdapter: CharactersAdapter){
-        adapter = CharactersAdapter(getDeviceWidth())
-        rvCharacters.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
-            header = CharactersLoadStateAdapter{ charactersAdapter.retry() },
+        rvCharacters.adapter = charactersAdapter
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (charactersAdapter.getItemViewType(position) == LOADING_ITEM)
+                    1 else 2
+            }
+        }
+        rvCharacters.layoutManager = gridLayoutManager//GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        rvCharacters.adapter = charactersAdapter.withLoadStateFooter(
             footer = CharactersLoadStateAdapter{ charactersAdapter.retry() }
         )
-        rvCharacters.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
     }
 
     private fun getDeviceWidth(): Int {

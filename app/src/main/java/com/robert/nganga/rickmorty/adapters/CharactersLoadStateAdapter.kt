@@ -2,6 +2,7 @@ package com.robert.nganga.rickmorty.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.GridLayout
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
@@ -17,6 +18,10 @@ class CharactersLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapt
         val binding = CharacterListFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return CharactersLoadStateViewHolder(binding, retry)
+    }
+
+    override fun getStateViewType(loadState: LoadState): Int {
+        return super.getStateViewType(loadState)
     }
 
     inner class CharactersLoadStateViewHolder(
