@@ -52,7 +52,7 @@ class CharacterDetailsEpoxy: EpoxyController() {
         WhereAboutsEpoxy(
             location = character!!.location!!.name,
             origin = character!!.origin!!.name
-        )
+        ).id("whereAbouts").addTo(this)
         
     }
     

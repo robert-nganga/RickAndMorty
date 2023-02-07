@@ -63,7 +63,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            tools:text="GENDER" />
+            android:text="GENDER" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -107,7 +107,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            tools:text="SPECIES" />
+            android:text="SPECIES" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -151,7 +151,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            tools:text="STATUS" />
+            android:text="STATUS" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
