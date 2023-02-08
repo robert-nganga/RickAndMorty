@@ -1,11 +1,13 @@
 package com.robert.nganga.rickmorty.ui.epoxy
 
 import android.util.Log
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
 import com.bumptech.glide.Glide
 import com.robert.nganga.rickmorty.R
 import com.robert.nganga.rickmorty.databinding.*
 import com.robert.nganga.rickmorty.model.Character
+import com.robert.nganga.rickmorty.model.Episode
 
 
 class CharacterDetailsEpoxy: EpoxyController() {
@@ -53,6 +55,13 @@ class CharacterDetailsEpoxy: EpoxyController() {
             location = character!!.location!!.name,
             origin = character!!.origin!!.name
         ).id("whereAbouts").addTo(this)
+
+        if(!character!!.episode.isNullOrEmpty()){
+            val items = character!!.episode!!.map {
+                Episodes(it).id(it.id)
+            }
+            CarouselModel_().models(items).id("episode_carousel").numViewsToShowOnScreen(1.25f).addTo(this)
+        }
         
     }
     
@@ -89,6 +98,17 @@ class CharacterDetailsEpoxy: EpoxyController() {
             tvCharacterOrigin.text = origin
             tvCharacterLocation.text = location
             Log.i("CharacterDetailsEpoxy", "Origin text set with:: $origin")
+        }
+
+    }
+
+    data class Episodes(
+        val episode: Episode
+    ): ViewBindingKotlinModel<EpoxyCharacterEpisodesModelBinding>(R.layout.epoxy_character_episodes_model){
+        override fun EpoxyCharacterEpisodesModelBinding.bind() {
+            tvEpisodeTitle.text = episode.name
+            tvEpisode.text = episode.episode
+            tvEpisodeAitDate.text = episode.air_date
         }
 
     }

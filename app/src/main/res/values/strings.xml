@@ -2,5 +2,7 @@
     <string name="app_name">Rick &amp; Morty</string>
     <string name="retry">Retry</string>
     <string name="no_results">Error fetching characters</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search Character</string>
 
 </resources>
