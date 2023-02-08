@@ -51,6 +51,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/green_400"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +64,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="GENDER" />
+            android:text="GENDER"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -73,6 +75,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +89,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="MALE" />
     </androidx.cardview.widget.CardView>
 
@@ -95,6 +99,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/green_400"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +112,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="SPECIES" />
+            android:text="SPECIES"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -117,6 +123,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,6 +137,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="HUMAN" />
     </androidx.cardview.widget.CardView>
 
@@ -139,8 +147,11 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/green_400"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardSpeciesTitle">
 
@@ -151,7 +162,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="STATUS" />
+            android:text="STATUS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -161,8 +173,11 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardStatusTitle"
         app:layout_constraintTop_toBottomOf="@+id/cardSpecies">
@@ -174,6 +189,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="ALIVE" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,6 +51,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/green_400"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -64,19 +65,22 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="ORIGIN" />
+            android:text="ORIGIN"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardOrigin"
         android:layout_width="0dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/whereAboutsLayout">
 
@@ -85,8 +89,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="7dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="EARTH (C_137)" />
     </androidx.cardview.widget.CardView>
 
@@ -96,8 +102,11 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/green_400"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardOriginTitle">
 
@@ -108,18 +117,22 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="LOCATION" />
+            android:text="LOCATION"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLocation"
         android:layout_width="0dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/cardOrigin">
@@ -131,6 +144,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginVertical="7dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="HUMAN" />
     </androidx.cardview.widget.CardView>
 
@@ -139,6 +154,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="96dp" />
+        app:layout_constraintGuide_begin="114dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

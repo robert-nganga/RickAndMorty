@@ -49,7 +49,6 @@ class CharacterDetailsFragment: Fragment(R.layout.fragment_character_details) {
                 }
                 Resource.Status.ERROR -> {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
-                    findNavController().navigateUp()
                 }
                 Resource.Status.LOADING -> {epoxyController.isLoading = true}
             }

@@ -40,6 +40,7 @@ class CharactersAdapter(private val deviceWidth: Int) :
                 layoutParams.width = deviceWidth / 2
                 binding.imgCharacter.layoutParams = layoutParams
                 Glide.with(binding.root).load(character.image).into(binding.imgCharacter)
+                binding.tvListName.text = character.name
             }
         }
 
