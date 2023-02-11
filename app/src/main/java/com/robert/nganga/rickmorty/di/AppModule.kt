@@ -6,6 +6,8 @@ import com.robert.nganga.rickmorty.data.local.CharacterDatabase
 import com.robert.nganga.rickmorty.data.remote.RickMortyAPI
 import com.robert.nganga.rickmorty.repository.RickMortyRepository
 import com.robert.nganga.rickmorty.repository.RickMortyRepositoryImpl
+import com.robert.nganga.rickmorty.repository.SearchRepository
+import com.robert.nganga.rickmorty.repository.SearchRepositoryImpl
 import com.robert.nganga.rickmorty.utils.Constants.BASE_URL
 import com.robert.nganga.rickmorty.utils.Constants.CHARACTER_DB
 import dagger.Module
@@ -55,5 +57,12 @@ object AppModule {
         database:CharacterDatabase,
         api: RickMortyAPI): RickMortyRepository{
         return RickMortyRepositoryImpl(database, api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(
+        api: RickMortyAPI): SearchRepository{
+        return SearchRepositoryImpl(api)
     }
 }

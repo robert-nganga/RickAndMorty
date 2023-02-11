@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.robert.nganga.rickmorty.model.Character
 import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 import com.robert.nganga.rickmorty.repository.RickMortyRepository
@@ -24,7 +25,7 @@ class RickMortyViewModel@Inject constructor(
     private var _character : MutableLiveData<Resource<Character>> = MutableLiveData()
     val character: LiveData<Resource<Character>> get() = _character
 
-    val characters: Flow<PagingData<CharacterResponse>> = repository.getAllCharacters()
+    val characters: Flow<PagingData<CharacterResponse>> = repository.getAllCharacters().cachedIn(viewModelScope)
 
 
     fun getCharacterById(id: Int) = viewModelScope.launch {
@@ -34,5 +35,5 @@ class RickMortyViewModel@Inject constructor(
     }
 
 
-    //fun searchCharacters(query:String) = repository.searchCharacters(query).cachedIn(viewModelScope)
+
 }

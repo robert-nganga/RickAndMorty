@@ -48,14 +48,18 @@ class CharacterDetailsFragment: Fragment(R.layout.fragment_character_details) {
                     epoxyController.character = response.data
                 }
                 Resource.Status.ERROR -> {
-                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.LOADING -> {epoxyController.isLoading = true}
             }
-
         }
 
         viewModel.getCharacterById(args.id)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

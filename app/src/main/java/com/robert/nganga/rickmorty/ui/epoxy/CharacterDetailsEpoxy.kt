@@ -10,7 +10,7 @@ import com.robert.nganga.rickmorty.model.Character
 import com.robert.nganga.rickmorty.model.Episode
 
 
-class CharacterDetailsEpoxy: EpoxyController() {
+class CharacterDetailsEpoxy(): EpoxyController() {
     
     var isLoading : Boolean = true
         set(value) {
@@ -66,7 +66,7 @@ class CharacterDetailsEpoxy: EpoxyController() {
             }
             CarouselModel_().models(items)
                     .id("episode_carousel")
-                    .numViewsToShowOnScreen(1.25f)
+                    .numViewsToShowOnScreen(1.0f)
                     .addTo(this)
         }
         
@@ -78,6 +78,13 @@ class CharacterDetailsEpoxy: EpoxyController() {
         val status: String
     ): ViewBindingKotlinModel<EpoxyCharacterHeaderModelBinding>(R.layout.epoxy_character_header_model){
         override fun EpoxyCharacterHeaderModelBinding.bind() {
+
+            when (status) {
+                "Alive" -> { tvCharacterStatus.setTextColor(root.context.getColor(R.color.green)) }
+                "Dead" -> { tvCharacterStatus.setTextColor(root.context.getColor(R.color.red)) }
+                else -> { tvCharacterStatus.setTextColor(root.context.getColor(R.color.black)) }
+            }
+
             tvCharacterName.text = name
             tvCharacterStatus.text = status
             Glide.with(root).load(image).into(imgCharacterImage)

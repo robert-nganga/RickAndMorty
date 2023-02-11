@@ -16,12 +16,7 @@ class CharactersLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): CharactersLoadStateViewHolder {
         val binding = CharacterListFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return CharactersLoadStateViewHolder(binding, retry)
-    }
-
-    override fun getStateViewType(loadState: LoadState): Int {
-        return super.getStateViewType(loadState)
     }
 
     inner class CharactersLoadStateViewHolder(

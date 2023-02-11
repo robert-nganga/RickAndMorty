@@ -10,7 +10,7 @@ import com.robert.nganga.rickmorty.databinding.CharacterListItemBinding
 import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 import com.robert.nganga.rickmorty.model.Character
 
-class CharactersAdapter(private val deviceWidth: Int) :
+class CharactersAdapter(private val imageWidth: Int) :
     PagingDataAdapter<CharacterResponse, CharactersAdapter.CharactersViewHolder>(REPO_COMPARATOR) {
 
     private var onItemClickListener: ((CharacterResponse)->Unit)? = null
@@ -38,7 +38,7 @@ class CharactersAdapter(private val deviceWidth: Int) :
         fun setData(character: CharacterResponse?) {
             if (character != null) {
                 val layoutParams = binding.imgCharacter.layoutParams
-                layoutParams.width = deviceWidth / 2
+                layoutParams.width = imageWidth
                 binding.imgCharacter.layoutParams = layoutParams
                 Glide.with(binding.root).load(character.image).into(binding.imgCharacter)
                 binding.tvListName.text = character.name

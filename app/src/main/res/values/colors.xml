@@ -13,4 +13,6 @@
     <color name="green_400">#71A05B</color>
     <color name="green_50">#E7EDDE</color>
     <color name="green_700">#386A20</color>
+    <color name="transparent">#00000000</color>
+    <color name="yellow">#f5f516</color>
 </resources>

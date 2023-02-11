@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.NavHostFragment
@@ -30,6 +31,15 @@ class MainActivity : AppCompatActivity() {
         val navHostFrag = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFrag.navController
 
+        navController.addOnDestinationChangedListener{ _, destination, _ ->
+
+            when(destination.id){
+                R.id.searchFragment -> {binding.toolBar.visibility = View.GONE}
+                else -> {binding.toolBar.visibility = View.VISIBLE}
+            }
+
+        }
+
         // Define AppBar Configuration
         val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
 
@@ -38,18 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         //Connect NavigationView with NavController
         binding.navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.options_menu, menu)
-
-        // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        }
-
-        return true
     }
 
     override fun onBackPressed() {

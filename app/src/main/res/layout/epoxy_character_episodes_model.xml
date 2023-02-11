@@ -9,7 +9,6 @@
         android:id="@+id/cardEpisode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="10dp"
@@ -41,8 +40,8 @@
 
             <TextView
                 android:id="@+id/tvEpisode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="10dp"

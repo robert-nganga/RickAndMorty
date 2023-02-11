@@ -7,23 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.navigation.fragment.findNavController
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robert.nganga.rickmorty.R
+import com.robert.nganga.rickmorty.adapters.CharactersLoadStateAdapter
 import com.robert.nganga.rickmorty.adapters.SearchAdapter
 import com.robert.nganga.rickmorty.databinding.FragmentSearchBinding
-import com.robert.nganga.rickmorty.ui.MainActivity
-import com.robert.nganga.rickmorty.ui.RickMortyViewModel
 import com.robert.nganga.rickmorty.ui.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -37,11 +36,11 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
     private var currentText = ""
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = Runnable{
-        searchAdapter.refresh()
-        if(currentText.isNotEmpty()) {
+        //Only search when user has typed at least 2 characters
+        if(currentText.length >=2) {
+            searchAdapter.refresh()
             getSearchResults(currentText)
         }
-        println(currentText)
     }
 
     override fun onCreateView(
@@ -59,35 +58,45 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
 
         binding.bindRecyclerview(searchAdapter)
 
-        var job: Job? = null
+        binding.imageButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        searchAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", it.id)
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_characterDetailsFragment, bundle)
+        }
+
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
-                //Creates a simple delay so that the user can finish typing
-                if (newText != null) {
+                if (newText != null && newText.isNotEmpty()) {
                     currentText = newText
                 }
+                //Creates a simple delay so that the user can finish typing
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable, 500L)
-//                job?.cancel()
-//                job = MainScope().launch {
-//                    delay(500L)
-//                    newText?.let{ query ->
-//                        if(query.isNotEmpty()){
-//                            getSearchResults(query)
-//                        }
-//                    }
-//                }
                 return true
             }
         })
+
+        binding.retryButton.setOnClickListener { searchAdapter.retry() }
+        searchAdapter.addLoadStateListener { loadState ->
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.rvSearch.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.errorMsg.isVisible = loadState.source.refresh is LoadState.Error
+            binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        handler.removeCallbacks(runnable)
         _binding = null
     }
 
@@ -101,8 +110,11 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
 
     private fun FragmentSearchBinding.bindRecyclerview(searchAdapter: SearchAdapter){
         rvSearch.apply {
-            adapter = searchAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            //add footer
+            adapter = searchAdapter.withLoadStateFooter(
+                footer = CharactersLoadStateAdapter { searchAdapter.retry() }
+            )
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.robert.nganga.rickmorty.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -34,6 +35,13 @@ class SearchAdapter: PagingDataAdapter<CharacterResponse, SearchAdapter.SearchVi
     inner class SearchViewHolder(private val binding: SearchItemBinding): RecyclerView.ViewHolder(binding.root){
         fun setData(character: CharacterResponse) {
             binding.apply {
+
+                when (character.status) {
+                    "Alive" -> { statusIndicator.setBackgroundColor(Color.GREEN) }
+                    "Dead" -> { statusIndicator.setBackgroundColor(Color.RED) }
+                    else -> { statusIndicator.setBackgroundColor(Color.YELLOW) }
+                }
+
                 Glide.with(itemView).load(character.image).into(imgSearchCharacter)
                 tvSearchName.text = character.name
                 tvSearchSpecies.text = character.species.uppercase()
