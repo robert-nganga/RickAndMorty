@@ -56,11 +56,18 @@ class CharacterDetailsEpoxy: EpoxyController() {
             origin = character!!.origin!!.name
         ).id("whereAbouts").addTo(this)
 
+        EpisodeHeader(
+            header = "EPISODES"
+        ).id("episode_header").addTo(this)
+
         if(!character!!.episode.isNullOrEmpty()){
             val items = character!!.episode!!.map {
                 Episodes(it).id(it.id)
             }
-            CarouselModel_().models(items).id("episode_carousel").numViewsToShowOnScreen(1.25f).addTo(this)
+            CarouselModel_().models(items)
+                    .id("episode_carousel")
+                    .numViewsToShowOnScreen(1.25f)
+                    .addTo(this)
         }
         
     }
@@ -111,5 +118,13 @@ class CharacterDetailsEpoxy: EpoxyController() {
             tvEpisodeAitDate.text = episode.air_date
         }
 
+    }
+
+    data class EpisodeHeader(
+        val header:String
+    ):ViewBindingKotlinModel<EpoxyCharacterEpisodeHeaderBinding>(R.layout.epoxy_character_episode_header){
+        override fun EpoxyCharacterEpisodeHeaderBinding.bind() {
+            episodeSection.text = header
+        }
     }
 }

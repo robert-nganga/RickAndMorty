@@ -93,8 +93,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun FragmentHomeBinding.bindAdapter(charactersAdapter: CharactersAdapter){
-        rvCharacters.adapter = charactersAdapter
+        //rvCharacters.adapter = charactersAdapter
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

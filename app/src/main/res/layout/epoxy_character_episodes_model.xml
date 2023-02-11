@@ -5,61 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutEpisodes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/cardEpisode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/episodeView"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:background="@color/teal_700" />
-
-        <TextView
-            android:id="@+id/episodeSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="EPISODES"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <View
-            android:id="@+id/episodeView2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
-            android:background="@color/teal_700" />
-
-    </LinearLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardEpisode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginVertical="10dp"
         app:cardBackgroundColor="@color/green_200"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutEpisodes">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

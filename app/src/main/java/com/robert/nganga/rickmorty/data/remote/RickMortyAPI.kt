@@ -22,6 +22,14 @@ interface RickMortyAPI {
         page: Int
     ): Response<AllCharactersResponse>
 
+    @GET("character/")
+    suspend fun searchCharacters(
+        @Query("name")
+        query: String,
+        @Query("page")
+        page: Int
+    ): Response<AllCharactersResponse>
+
     @GET("episode/{episode_range}")
     suspend fun getEpisodeRange(
         @Path("episode_range")

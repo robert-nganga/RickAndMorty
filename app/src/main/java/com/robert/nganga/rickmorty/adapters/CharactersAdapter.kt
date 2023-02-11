@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.robert.nganga.rickmorty.databinding.CharacterListItemBinding
 import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
+import com.robert.nganga.rickmorty.model.Character
 
 class CharactersAdapter(private val deviceWidth: Int) :
     PagingDataAdapter<CharacterResponse, CharactersAdapter.CharactersViewHolder>(REPO_COMPARATOR) {
