@@ -1,4 +1,4 @@
-# RickAndMorty
+# RickAndMortyApp
 A mobile application built with Kotlin and MVVM architecture pattern that displays character details from the popular animated television show, Rick and Morty. This app uses the Rick and Morty API to retrieve character data and follows the Android recommended best practices.
 
 ## Features
@@ -24,5 +24,5 @@ The app is built with popular Jetpack libraries including:
 To use this app, simply clone or download the repository, open the project in Android Studio and run the app on an emulator or physical device. The app will use the Rick and Morty API to retrieve character data and display it to the user, or you can download the apk file attached.
 
 ## Screenshots
- ![](screenshots/screenshot0.png)
- ![](screenshots/screenshot5.png)
+ ![](screenshots/screenshot0.PNG)
+ ![](screenshots/screenshot5.PNG)
