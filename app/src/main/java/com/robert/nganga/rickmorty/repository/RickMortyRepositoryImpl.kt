@@ -4,16 +4,13 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.robert.nganga.rickmorty.data.cache.CharacterCache
 import com.robert.nganga.rickmorty.data.local.CharacterDatabase
 import com.robert.nganga.rickmorty.data.mappers.CharacterMapper
 import com.robert.nganga.rickmorty.data.paging.CharacterRemoteMediator
-import com.robert.nganga.rickmorty.data.paging.SearchPagingSource
 import com.robert.nganga.rickmorty.data.remote.RickMortyAPI
 import com.robert.nganga.rickmorty.data.remote.response.CharacterResponse
 import com.robert.nganga.rickmorty.model.Character
 import com.robert.nganga.rickmorty.model.Episode
-import com.robert.nganga.rickmorty.utils.Constants
 import com.robert.nganga.rickmorty.utils.Constants.ITEMS_PER_PAGE
 import com.robert.nganga.rickmorty.utils.DataAccess.safeApiCall
 import com.robert.nganga.rickmorty.utils.Resource
@@ -29,6 +26,8 @@ class RickMortyRepositoryImpl@Inject constructor(
     // Mutex to make writes to cached values thread-safe.
     private val characterMutex = Mutex()
 
+    val characterMap = mutableMapOf<Int, Character>()
+
 
 
     @OptIn(ExperimentalPagingApi::class)
@@ -42,7 +41,7 @@ class RickMortyRepositoryImpl@Inject constructor(
     }
 
     override suspend fun getCharacterById(characterId: Int): Resource<Character> {
-        val characterCache = characterMutex.withLock { CharacterCache.characterMap[characterId] }
+        val characterCache = characterMutex.withLock { characterMap[characterId] }
 
         // Check if the cache is empty and return it if its not
         if (characterCache != null){
@@ -53,7 +52,7 @@ class RickMortyRepositoryImpl@Inject constructor(
             return if (response.status ==  Resource.Status.SUCCESS) {
                 val episodeList = response.data?.let { getEpisodesFromCharacterResponse(it) }
                 val character = CharacterMapper.buildFrom(response.data!!, episodeList)
-                CharacterCache.characterMap[characterId] = character
+                characterMutex.withLock { characterMap[characterId] = character }
                 Resource.success(character)
             }else{ Resource.error(response.message!!) }
         }
@@ -74,6 +73,7 @@ class RickMortyRepositoryImpl@Inject constructor(
         val episodeRange = response.episode?.map {
             it.substring(it.lastIndexOf("/") + 1)
         }.toString()
+
         val episodesResponse = api.getEpisodeRange(episodeRange)
 
         return if (episodesResponse.isSuccessful){

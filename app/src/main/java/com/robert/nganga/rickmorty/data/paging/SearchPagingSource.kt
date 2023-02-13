@@ -46,8 +46,11 @@ class SearchPagingSource@Inject constructor(
     }
 
     private fun getNextPageKey(nextPage: String?):Int?{
-        val next = nextPage?.substring(nextPage.indexOf("page=")+5, nextPage.indexOf("&"))?.toInt()
-        Log.i("SearchPagingSource", "getNextPageKey: $next")
+        val next = try{
+            nextPage?.substring(nextPage.indexOf("page=")+5, nextPage.indexOf("&"))?.toInt()
+        }catch (e: Exception) {
+            null
+        }
         return next
     }
 

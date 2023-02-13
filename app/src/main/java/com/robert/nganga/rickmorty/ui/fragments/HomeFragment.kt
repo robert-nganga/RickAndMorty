@@ -67,18 +67,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 // Show the retry state if initial load or refresh fails.
                 binding.retryButton.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
 
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-//                val errorState = loadState.source.append as? LoadState.Error
-//                    ?: loadState.source.prepend as? LoadState.Error
-//                    ?: loadState.append as? LoadState.Error
-//                    ?: loadState.prepend as? LoadState.Error
-//                errorState?.let {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "\uD83D\uDE28 Wooops ${it.error}",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
             }
         }
 
@@ -89,7 +77,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {
@@ -124,12 +111,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         } else {
             width / 2
         }
-        //return displayMetrics.widthPixels - paddingWidthInPx
     }
 
     private fun getDeviceWidth(): Int {
         val displayMetrics = resources.displayMetrics
-        Log.i("HomeFragment", displayMetrics.widthPixels.toString())
         return displayMetrics.widthPixels
     }
 
