@@ -7,7 +7,7 @@ A mobile application built with Kotlin and MVVM architecture pattern that displa
    - Offline support with remote mediator and caching
 
 ## Techstacks
-The app is built with popular Jetpack libraries including:
+The app is built using popular libraries including:
    * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging) Paging is a part of Android Jetpack and a data library that provides a simple and efficient way to load data, especially when dealing with large datasets. It helps to load data gradually and gracefully within our app's UI.
    * [Room](https://developer.android.com/topic/libraries/architecture/room) Room is a part of the Android Jetpack and a persistence library that provides an abstract layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
    * [Navigation Component](https://developer.android.com/guide/navigation) Navigation Component is a part of Android Jetpack and a UI toolkit for navigating between screens within an app. It provides a simple, consistent and flexible way to manage navigation in the app.
