@@ -23,6 +23,9 @@ The app is built using popular libraries including:
 ## Usage
 To use this app, simply clone or download the repository, open the project in Android Studio and run the app on an emulator or physical device. The app will use the Rick and Morty API to retrieve character data and display it to the user, or you can download the apk file attached.
 
+## Contributions
+We welcome contributions to this project. If you have any suggestions or want to report a bug, please open an issue or submit a pull request.
+
 ## Screenshots
  ![](screenshots/screenshot0.PNG)
  ![](screenshots/screenshot5.PNG)
